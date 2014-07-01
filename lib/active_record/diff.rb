@@ -39,7 +39,9 @@ module ActiveRecord
         end
         
         puts attrs_to_be_deleted
+        puts attrs_to_be_deleted.class
         puts attrs
+        puts attrs.class
         attrs_to_be_deleted.each { |attr| attrs.delete(attr) } if attrs_to_be_deleted
         
         diff_each(attrs) do |attr_name|
