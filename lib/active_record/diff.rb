@@ -36,7 +36,10 @@ module ActiveRecord
 
           attrs = columns + (attrs.first[:include] || []) - (attrs.first[:exclude] || [])
         end
-
+        
+        attrs_to_be_deleted = attrs - old_record.attributes.keys
+        attrs_to_be_deleted.each { |attr| attrs.delete(attr) }
+        
         diff_each(attrs) do |attr_name|
           [attr_name, old_record.send(attr_name), new_record.send(attr_name)]
         end
