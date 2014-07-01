@@ -24,6 +24,7 @@ module ActiveRecord
 
       if new_record.is_a?(Hash)
         diff_each(new_record) do |(attr_name, hash_value)|
+          next if attrs_to_be_deleted.include?(attr_name)
           [attr_name, old_record.send(attr_name), hash_value]
         end
       else
