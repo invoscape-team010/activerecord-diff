@@ -38,7 +38,7 @@ module ActiveRecord
           attrs = columns + (attrs.first[:include] || []) - (attrs.first[:exclude] || [])
         end
         
-        attrs.collect(&:to_sym)
+        attrs.collect!(&:to_sym)
         puts attrs
         attrs_to_be_deleted.each { |attr| puts attrs.include?(attr) } if attrs_to_be_deleted
         attrs_to_be_deleted.each { |attr| attrs.delete(attr) } if attrs_to_be_deleted
