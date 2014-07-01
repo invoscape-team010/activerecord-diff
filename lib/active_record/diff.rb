@@ -15,7 +15,7 @@ module ActiveRecord
       not diff(record).empty?
     end
 
-    def diff(other_record = nil)
+    def diff(other_record = nil, attrs_to_be_deleted = nil)
       if other_record.nil?
         old_record, new_record = self.class.find(id), self
       else
@@ -37,8 +37,7 @@ module ActiveRecord
           attrs = columns + (attrs.first[:include] || []) - (attrs.first[:exclude] || [])
         end
         
-        attrs_to_be_deleted = attrs - old_record.attributes.keys
-        attrs_to_be_deleted.each { |attr| attrs.delete(attr) }
+        attrs_to_be_deleted.each { |attr| attrs.delete(attr) } if attrs_to_be_deleted
         
         diff_each(attrs) do |attr_name|
           [attr_name, old_record.send(attr_name), new_record.send(attr_name)]
