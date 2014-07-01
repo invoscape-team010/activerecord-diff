@@ -38,6 +38,8 @@ module ActiveRecord
           attrs = columns + (attrs.first[:include] || []) - (attrs.first[:exclude] || [])
         end
         
+        puts attrs_to_be_deleted
+        puts attrs
         attrs_to_be_deleted.each { |attr| attrs.delete(attr) } if attrs_to_be_deleted
         
         diff_each(attrs) do |attr_name|
