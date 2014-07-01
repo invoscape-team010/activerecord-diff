@@ -39,10 +39,7 @@ module ActiveRecord
         end
         
         attrs.collect!(&:to_sym)
-        puts attrs
-        attrs_to_be_deleted.each { |attr| puts attrs.include?(attr) } if attrs_to_be_deleted
         attrs_to_be_deleted.each { |attr| attrs.delete(attr) } if attrs_to_be_deleted
-        puts attrs
         
         diff_each(attrs) do |attr_name|
           [attr_name, old_record.send(attr_name), new_record.send(attr_name)]
